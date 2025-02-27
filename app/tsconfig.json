@@ -5,9 +5,7 @@
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": [
-      "vite/client"
-    ],
+    "types": ["vite/client"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -15,7 +13,6 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
 
@@ -24,7 +21,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./",
+    "baseUrl": "./"
   },
-  "include": ["src"],
+  "include": ["src"]
 }
