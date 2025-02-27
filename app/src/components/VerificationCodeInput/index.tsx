@@ -1,14 +1,19 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Backspace } from '@fluentui/keyboard-keys';
 import { VerificationCodeInputProps } from '@/components/VerificationCodeInput/types';
+import clsx from 'clsx';
 
 const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
   verificationCodeLength,
   verificationCode,
   onChange,
   permittedKeysForVerificationCode,
+  errors,
 }) => {
   const inputsRef = useRef<HTMLInputElement[]>([]);
+  const [inputsTouched, setInputsTouched] = useState<boolean[]>(() => {
+    return Array.from({ length: verificationCodeLength }).map(() => false);
+  });
 
   const handleBackspacePress = useCallback(
     (index: number) => {
@@ -92,12 +97,26 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
     },
     [onChange, verificationCode, permittedKeysForVerificationCode]
   );
-
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
     },
     []
+  );
+  const handleBlur = useCallback(
+    (index: number) => {
+      if (inputsTouched[index]) {
+        return;
+      }
+
+      setInputsTouched((inputsTouched) => {
+        const newInputsTouched = [...inputsTouched];
+        newInputsTouched[index] = true;
+
+        return newInputsTouched;
+      });
+    },
+    [inputsTouched]
   );
 
   return (
@@ -107,10 +126,23 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
           key={index}
           type="text"
           maxLength={1}
-          className="w-15 h-15 border border-gray-400 text-center text-2xl font-medium rounded caret-transparent"
+          className={clsx(
+            {
+              'focus:border-red-500 border-red-300':
+                Boolean(inputsTouched) && Boolean(errors[index]),
+            },
+            {
+              'focus:border-teal-500 border-teal-300':
+                !inputsTouched[index] || !errors[index],
+            },
+            'w-15 h-15 border border-gray-400 text-center text-2xl font-medium rounded caret-transparent focus:outline-none border-2 focus:border-3 '
+          )}
           onKeyDown={(event) => handleKeydown(index, event)}
           onChange={handleInputChange}
           onPaste={(event) => handlePaste(index, event)}
+          onBlur={() => {
+            handleBlur(index);
+          }}
           ref={(ref) => {
             if (!ref) {
               return;
