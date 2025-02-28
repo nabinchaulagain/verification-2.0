@@ -1,3 +1,4 @@
+import NotFound from '@/components/NotFound/NotFound';
 import VerificationSuccessPage from '@/pages/success';
 import VerifyPage from '@/pages/verify';
 import { pageRoutes } from '@/router/constants';
@@ -11,6 +12,7 @@ const Routes = () => {
         path={pageRoutes.VERIFICATION_SUCCESS}
         element={<VerificationSuccessPage />}
       />
+      <Route path="*" element={<NotFound />} />
     </RouterRoutes>
   );
 };
