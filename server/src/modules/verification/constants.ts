@@ -1,0 +1,3 @@
+export const VERIFICATION_CODE_LENGTH = 6;
+export const VERIFICATION_CODE_PATTERN = /[0-9]+/;
+export const FINAL_DIGIT_IN_VERIFICATION_CODE = '7';
