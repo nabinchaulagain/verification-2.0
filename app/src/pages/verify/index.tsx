@@ -32,11 +32,15 @@ const VerifyPage = () => {
       event.preventDefault();
       verifyCode(verficationCode.join(''));
     },
-    [verifyCode, verficationCode ]
+    [verifyCode, verficationCode]
   );
 
   return (
-    <form className="mt-4 text-center" onSubmit={handleSubmit}>
+    <form
+      className="mt-8 w-md p-6 mx-auto text-center border border-gray-300 rounded-lg bg-gray-50 shadow-md"
+      onSubmit={handleSubmit}
+    >
+      <h2 className="mb-4 text-lg">Enter your verification code</h2>
       <div className="mx-auto">
         <VerificationCodeInput
           verificationCodeLength={verificationCodeLength}
@@ -50,9 +54,9 @@ const VerifyPage = () => {
         <Button
           variant="info"
           type="submit"
-          isDisabled={!hasNoVerificationCodeErrors}
+          isDisabled={!hasNoVerificationCodeErrors || isVerificationPending}
         >
-          Verify
+          {isVerificationPending ? 'Verifying...' : 'Verify'}
         </Button>
       </div>
     </form>
