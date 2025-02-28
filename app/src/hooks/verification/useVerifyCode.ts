@@ -1,3 +1,4 @@
+import { pageRoutes } from '@/router/constants';
 import { verifyCode } from '@/services/verification';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
@@ -9,7 +10,7 @@ export const useVerifyCode = () => {
   return useMutation<unknown, Error, string>({
     mutationFn: verifyCode,
     onSuccess: () => {
-      navigate('/success');
+      navigate(pageRoutes.VERIFICATION_SUCCESS);
       toast('Verification successful');
     },
     onError: (error) => {
