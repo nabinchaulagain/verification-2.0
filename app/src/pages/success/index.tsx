@@ -1,6 +1,6 @@
 const VerificationSuccessPage = () => {
   return (
-    <div className="bg-teal-100 w-lg mx-auto p-8 mt-8 rounded-lg shadow-md">
+    <div className="bg-teal-100 lg:w-lg w-full mx-auto p-8 mt-8 rounded-lg shadow-md">
       <h1 className="text-2xl text-center font-bolder">
         &#x2705; Verification Successful
       </h1>

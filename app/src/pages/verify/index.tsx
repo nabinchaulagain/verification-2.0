@@ -37,7 +37,7 @@ const VerifyPage = () => {
 
   return (
     <form
-      className="mt-8 w-md p-6 mx-auto text-center border border-gray-300 rounded-lg bg-gray-50 shadow-md"
+      className="mt-8 md:w-md w-full p-6 mx-auto text-center border border-gray-300 rounded-lg bg-gray-50 shadow-md"
       onSubmit={handleSubmit}
     >
       <h2 className="mb-4 text-lg">Enter your verification code</h2>
