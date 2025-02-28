@@ -72,7 +72,7 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
         .some((char) => !permittedKeysForVerificationCode.includes(char));
 
       if (hasInvalidCharacter) {
-        toast.error('Pasted code is invalid!')
+        toast.error('Pasted code contains invalid characters!');
         return;
       }
 

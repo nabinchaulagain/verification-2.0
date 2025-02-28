@@ -1,12 +1,13 @@
 import Button from '@/components/Button';
 import VerificationCodeInput from '@/components/VerificationCodeInput';
+import { useVerifyCode } from '@/hooks/verification/useVerifyCode';
 import {
   permittedKeysForVerificationCode,
   verificationCodeLength,
 } from '@/pages/verify/constants';
 import verificationCodeSchema from '@/schemas/verificationCode';
 import { getFieldErrors } from '@/utils/validation';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 const VerifyPage = () => {
   const [verficationCode, setVerficationCode] = useState<string[]>(
@@ -23,14 +24,19 @@ const VerifyPage = () => {
         Object.keys(verificationCodeFieldErrors).length === 0,
     };
   }, [verficationCode]);
+  const { mutate: verifyCode, isPending: isVerificationPending } =
+    useVerifyCode();
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      verifyCode(verficationCode.join(''));
+    },
+    [verifyCode, verficationCode ]
+  );
 
   return (
-    <form
-      className="mt-4 text-center"
-      onSubmit={(event) => {
-        event.preventDefault();
-      }}
-    >
+    <form className="mt-4 text-center" onSubmit={handleSubmit}>
       <div className="mx-auto">
         <VerificationCodeInput
           verificationCodeLength={verificationCodeLength}
