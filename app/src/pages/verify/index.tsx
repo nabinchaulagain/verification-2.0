@@ -12,14 +12,17 @@ const VerifyPage = () => {
   const [verficationCode, setVerficationCode] = useState<string[]>(
     Array(verificationCodeLength)
   );
-  const { verficationCodeErrors, hasNoVerificationCodeErrors } =
-    useMemo(() => {
-      const verificationCodeFieldErrors = getFieldErrors(verificationCodeSchema, verficationCode);
-      return {
-        verficationCodeErrors: verificationCodeFieldErrors,
-        hasNoVerificationCodeErrors  : Object.keys(verificationCodeFieldErrors ).length === 0,
-      };
-    }, [verficationCode]);
+  const { verficationCodeErrors, hasNoVerificationCodeErrors } = useMemo(() => {
+    const verificationCodeFieldErrors = getFieldErrors(
+      verificationCodeSchema,
+      verficationCode
+    );
+    return {
+      verficationCodeErrors: verificationCodeFieldErrors,
+      hasNoVerificationCodeErrors:
+        Object.keys(verificationCodeFieldErrors).length === 0,
+    };
+  }, [verficationCode]);
 
   return (
     <form
@@ -41,7 +44,7 @@ const VerifyPage = () => {
         <Button
           variant="info"
           type="submit"
-          isDisabled={!hasNoVerificationCodeErrors  }
+          isDisabled={!hasNoVerificationCodeErrors}
         >
           Verify
         </Button>

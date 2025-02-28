@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { Backspace } from '@fluentui/keyboard-keys';
 import { VerificationCodeInputProps } from '@/components/VerificationCodeInput/types';
 import clsx from 'clsx';
+import { toast } from 'react-toastify';
 
 const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
   verificationCodeLength,
@@ -71,7 +72,7 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
         .some((char) => !permittedKeysForVerificationCode.includes(char));
 
       if (hasInvalidCharacter) {
-        // TODO: Toast a error message here.
+        toast.error('Pasted code is invalid!')
         return;
       }
 
